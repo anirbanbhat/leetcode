@@ -11,6 +11,14 @@ import java.util.Set;
 import java.util.TreeSet;
 import java.util.stream.Collectors;
 
+/**
+ * 
+ * @author anirban
+ * 
+ * See findMedianSortedArrays5
+ *
+ */
+
 public class MedianOfTwoSortedArrays {
 
 	public static void main(String[] args) {
@@ -22,6 +30,10 @@ public class MedianOfTwoSortedArrays {
 		//System.out.println(findMedianSortedArrays3(new int[]{}, new int[]{1}));
 		System.out.println(findMedianSortedArrays4(new int[]{1,2}, new int[]{3,4}));
 		System.out.println(findMedianSortedArrays4(new int[]{1,1,1,1,1,1,1,1,1,1,4,4}, new int[]{1,3,4,4,4,4,4,4,4,4,4}));
+		
+		System.out.println(findMedianSortedArrays5(new int[]{1,2}, new int[]{3,4}));
+		System.out.println(findMedianSortedArrays5(new int[]{1,1,1,1,1,1,1,1,1,1,4,4}, new int[]{1,3,4,4,4,4,4,4,4,4,4}));
+		System.out.println(findMedianSortedArrays5(new int[]{1}, new int[]{}));
 	}
 
 	public static double findMedianSortedArrays(int[] nums1, int[] nums2) {
@@ -112,4 +124,30 @@ public class MedianOfTwoSortedArrays {
         	return (top.poll() + top.poll())/2.0;
         }
     }
+	
+	public static double findMedianSortedArrays5(int[] nums1, int[] nums2) {
+		int length = nums1.length + nums2.length;
+		if(length == 0) {
+			return 0;
+		}
+		boolean isEven = length%2==0;
+		int[] arr = new int[length/2+1];
+		int nums1Index = 0;
+		int nums2Index = 0;
+		int index = 0;
+		while (index<arr.length && nums1Index<nums1.length && nums2Index<nums2.length) {
+			if(nums1[nums1Index]<nums2[nums2Index]) {
+				arr[index++] = nums1[nums1Index++];
+			} else {
+				arr[index++] = nums2[nums2Index++];
+			}
+		}
+		while(index<arr.length && nums1Index<nums1.length) {
+			arr[index++] = nums1[nums1Index++];
+		}
+		while(index<arr.length && nums2Index<nums2.length) {
+			arr[index++] = nums2[nums2Index++];
+		}
+		return isEven?(arr[arr.length-1] + arr[arr.length-2])/2.0:arr[arr.length-1];
+	}
 }

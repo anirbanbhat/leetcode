@@ -43,7 +43,9 @@ public class GroupAnagrams {
         int[] count = new int[26];
         for (String s : strs) {
             Arrays.fill(count, 0);
-            for (char c : s.toCharArray()) count[c - 'a']++;
+            for (char c : s.toCharArray()) {
+            	count[c - 'a']++;
+            }
 
             StringBuilder sb = new StringBuilder("");
             for (int i = 0; i < 26; i++) {
@@ -52,7 +54,9 @@ public class GroupAnagrams {
             }
             String key = sb.toString();
             System.out.println(s + "\t:\t" + key);
-            if (!ans.containsKey(key)) ans.put(key, new ArrayList<String>());
+            if (!ans.containsKey(key)) {
+            	ans.put(key, new ArrayList<String>());
+            }
             ans.get(key).add(s);
         }
         return new ArrayList<>(ans.values());

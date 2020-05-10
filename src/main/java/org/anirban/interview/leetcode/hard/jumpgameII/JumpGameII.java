@@ -32,7 +32,7 @@ public class JumpGameII {
 	public static void main(String[] args) throws IOException {
 		//System.out.println(jump(new int[] {2,3,1,1,4}));
 		//System.out.println(jump(new int[] {2,3,0,1,4}));
-		BufferedReader brTest = new BufferedReader(new FileReader("src/org/anirban/interview/leetcode/hard/jumpgameII/testcase1.txt"));
+		BufferedReader brTest = new BufferedReader(new FileReader("src/main/resources/org/anirban/interview/leetcode/hard/jumpgameII/testcase1.txt"));
 		String[] str = brTest.readLine().split(",");
 		int[] array = Arrays.stream(str).mapToInt(Integer::parseInt).toArray();
 		System.out.println(bottomUp(array));

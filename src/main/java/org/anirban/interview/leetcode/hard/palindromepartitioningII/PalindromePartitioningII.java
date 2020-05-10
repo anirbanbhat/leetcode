@@ -19,36 +19,35 @@ Explanation: The palindrome partitioning ["aa","b"] could be produced using 1 cu
 public class PalindromePartitioningII {
 
 	
-	static int[][] table;
 	public static void main(String[] args) {
-		// String s = "abtbl";
+		String s = "abtbl";
 		// String s = "aab";
-		String s = "malayalam";
-		table = new int[s.length()][s.length()];
+		// String s = "malayalam";
 		System.out.println(getMinimumCut(s));
 	}
 	
 	public static int getMinimumCut(String s) {
+		int[][] table = new int[s.length()][s.length()];
 		if(s.length()==0 || s.length()==1) {
 			return 0;
 		}
 		for(int counter=1; counter<s.length(); counter++) {
-			printTable();
+			printTable(table);
 			int i = 0;
 			for(int j=counter; j<s.length(); j++) {
 				if(isPalindrome(s, i, j)) {
 					table[i][j] = 0;
 				} else {
-					table[i][j] = getMinValue(i, j);
+					table[i][j] = getMinValue(i, j, table);
 				}
 				i++;
 			}
 		}
-		printTable();
+		printTable(table);
 		return table[0][s.length()-1];
 	}
 	
-	public static int getMinValue(int start, int end) {
+	public static int getMinValue(int start, int end, int[][] table) {
 		int min = Integer.MAX_VALUE;
 		for(int i = start; i < end; i++) {
 			min = Math.min(min, (table[start][i] + table[i+1][end]));
@@ -67,7 +66,7 @@ public class PalindromePartitioningII {
 		return true;
 	}
 	
-	public static void printTable() {
+	public static void printTable(int[][] table) {
 		for (int i = 0; i < table.length; i++) {
 			String prefix = "";
 			for (int j = 0; j < table.length; j++) {

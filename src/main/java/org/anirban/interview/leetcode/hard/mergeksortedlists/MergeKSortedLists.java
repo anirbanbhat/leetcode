@@ -50,12 +50,9 @@ public class MergeKSortedLists {
 	public static ListNode mergeKLists(ListNode[] lists) {
         if(lists==null || lists.length==0)
             return null;
-        Comparator<ListNode> cp = new Comparator<ListNode>(){
-            public int compare(ListNode l1, ListNode l2){
-                return l1.val - l2.val;
-            }
-        };
-        PriorityQueue<ListNode> pq = new PriorityQueue<ListNode>(cp);
+        PriorityQueue<ListNode> pq = new PriorityQueue<ListNode>((l1, l2) -> {
+        	return l1.val - l2.val;
+        });
         for(ListNode node: lists){
         	System.out.println("**************");
         	printListNode(node);
