@@ -44,11 +44,11 @@ public class ZigzagConversion {
         }
         //replaceAll("\\s+","");
         printMatrix(zigzag);
-        String ret = "";
+        StringBuilder ret = new StringBuilder();
         for(int i=0; i<numRows; i++){
-            ret += (new String(zigzag[i])).replaceAll("\\s+","");
+            ret.append((new String(zigzag[i])).replaceAll("\\s+",""));
         }
-        return ret;
+        return ret.toString();
     }
     public static boolean isInvalid(char[][] zigzag, int x, int y){
     	System.out.println("zigzag.length: "  + zigzag.length);

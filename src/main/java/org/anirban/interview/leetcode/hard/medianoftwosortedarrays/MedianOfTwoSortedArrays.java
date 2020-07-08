@@ -35,8 +35,39 @@ public class MedianOfTwoSortedArrays {
 		System.out.println(findMedianSortedArrays5(new int[]{1,1,1,1,1,1,1,1,1,1,4,4}, new int[]{1,3,4,4,4,4,4,4,4,4,4}));
 		System.out.println(findMedianSortedArrays5(new int[]{1}, new int[]{}));
 	}
-
+	
 	public static double findMedianSortedArrays(int[] nums1, int[] nums2) {
+        int i1 = 0; int i2 = 0; int count = 0; 
+        int halfLength = (nums1.length + nums2.length)/2 + 1;
+        int[] arr = new int[2];
+        while(i1 < nums1.length && i2 < nums2.length && count < halfLength){
+            if(nums1[i1] < nums2[i2]){
+                arr[0] = arr[1];
+                arr[1] = nums1[i1++];
+                count++;
+            } else {
+                arr[0] = arr[1];
+                arr[1] = nums2[i2++];
+                count++;
+            }
+        }
+        while(i1 < nums1.length && count < halfLength){
+            arr[0] = arr[1];
+            arr[1] = nums1[i1++];
+            count++;
+        }
+        while(i2 < nums2.length && count < halfLength){
+            arr[0] = arr[1];
+            arr[1] = nums2[i2++];
+            count++;
+        }
+        if((nums1.length + nums2.length)%2 == 0){
+            return ((double)arr[1] + (double)arr[0])/2;
+        }
+        return (double)arr[1];
+    }
+
+	public static double findMedianSortedArraysOld(int[] nums1, int[] nums2) {
         Queue<Integer> q = new PriorityQueue<Integer>();
         for(int i: nums1) {
         	q.add(i);
