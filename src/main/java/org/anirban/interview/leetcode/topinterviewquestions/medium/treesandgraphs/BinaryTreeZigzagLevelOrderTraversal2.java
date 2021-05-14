@@ -27,7 +27,7 @@ import java.util.List;
  *
  */
 
-public class BinaryTreeZigzagLevelOrderTraversal {
+public class BinaryTreeZigzagLevelOrderTraversal2 {
 
 	public static void main(String[] args) {
 		TreeNode root = new TreeNode(1);
@@ -53,39 +53,39 @@ public class BinaryTreeZigzagLevelOrderTraversal {
 	}
 
 	public static List<List<Integer>> zigzagLevelOrder(TreeNode root) {
-        List<List<Integer>> list = new ArrayList<>();
+		List<List<Integer>> list = new ArrayList<>();
         if(root == null){
             return list;
         }
-        boolean rightToLeft = true;
+        boolean rightToLeft = false;
         LinkedList<TreeNode> q = new LinkedList<>();
         q.add(root);
         while(!q.isEmpty()){
             int size = q.size();
             List<Integer> currentList = new ArrayList<>();
-            LinkedList<TreeNode> temp = new LinkedList<>();
+            LinkedList<TreeNode> tmpList = new LinkedList<>();
             for(int i = 0; i < size; i++){
                 TreeNode current = q.remove(0);
                 currentList.add(current.val);
                 if(rightToLeft){
-                    if(current.left != null){
-                    	temp.addFirst(current.left);
-                    }
                     if(current.right != null){
-                    	temp.addFirst(current.right);
+                        tmpList.addFirst(current.right);
+                    }
+                    if(current.left != null){
+                        tmpList.addFirst(current.left);
                     }
                 } else {
-                    if(current.right != null){
-                    	temp.addFirst(current.right);
-                    }
                     if(current.left != null){
-                    	temp.addFirst(current.left);
+                        tmpList.addFirst(current.left);
+                    }
+                    if(current.right != null){
+                        tmpList.addFirst(current.right);
                     }
                 }
             }
-            q.addAll(temp);
-            rightToLeft = !rightToLeft;
+            q.addAll(tmpList);
             list.add(currentList);
+            rightToLeft = !rightToLeft;
         }
         return list;
     }

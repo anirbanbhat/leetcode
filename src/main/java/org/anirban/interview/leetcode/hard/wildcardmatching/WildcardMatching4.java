@@ -5,6 +5,7 @@ public class WildcardMatching4 {
 	public static void main(String[] args) {
 		System.out.println(isMatch("acdcb", "a*c?b"));
 		System.out.println(isMatch("acdcb", "ac*?b"));
+		System.out.println(isMatch("aaabbbaabaaaaababaabaaabbabbbbbbbbaabababbabbbaaaaba", "a*******b"));
 	}
 	
 	public static boolean isMatch(String s, String p) {

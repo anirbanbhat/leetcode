@@ -54,11 +54,12 @@ Output: false
 public class WildcardMatching {
 
 	public static void main(String[] args) {
-		isMatch("acdcb", "a*c?b");
-		isMatch("acdcb", "ac*?b");
+		System.out.println(isMatch("acdcb", "a*c?b"));
+		System.out.println(isMatch("acdcb", "ac*?b"));
+		System.out.println(isMatch("aaabbbaabaaaaababaabaaabbabbbbbbbbaabababbabbbaaaaba", "a*******b"));
 	}
 	
-	public static boolean isMatch(String s, String p) {
+	/*public static boolean isMatch(String s, String p) {
 		System.out.println("*********************************");
 		System.out.println("s=" + s);
 		System.out.println("p=" + p);
@@ -94,5 +95,22 @@ public class WildcardMatching {
 		}
 		System.out.println("result=" + (j==p.length()));
 		return j==p.length();
-	}
+	}*/
+	
+	public static boolean isMatch(String s, String p) {
+        if(p.isEmpty()) {
+            return s.isEmpty();
+        }
+        boolean currentMatch = !s.isEmpty() && (p.charAt(0)==s.charAt(0) || p.charAt(0)=='?');
+        
+        if(p.charAt(0) == '*'){
+            boolean match = isMatch(s, p.substring(1));
+            if(!s.isEmpty()){
+                match = match || isMatch(s.substring(1), p);
+            }
+            return match;
+        } else {
+            return currentMatch && isMatch(s.substring(1), p.substring(1));
+        }
+    }
 }
