@@ -4,6 +4,11 @@ package org.anirban.interview.leetcode.hard.regularexpressionmatching;
 public class RegularExpressionMatching {
 
 	public static void main(String[] args) {
+		System.out.println(isMatch("aa", "a*")); // true
+		System.out.println(isMatchRecursive("ab", ".*c")); // false
+		System.out.println(isMatch("ab", ".*c")); // false
+		System.out.println(isMatchRecursive("a", ".*..a*")); // false
+		System.out.println(isMatch("a", ".*..a*")); // false
 		System.out.println(isMatchRecursive("aa", "a*")); // true
 		System.out.println(isMatchRecursive("ab", ".*")); // true
 		System.out.println(isMatchRecursive("aab", "c*a*b")); // true
@@ -43,14 +48,14 @@ public class RegularExpressionMatching {
 		return false;
 	}
 	
-	public boolean isMatch(String s, String p) {
+	public static boolean isMatch(String s, String p) {
         if(p.isEmpty()) {
             return s.isEmpty();
         }
         boolean firstMatch = (!s.isEmpty() && (p.charAt(0) == s.charAt(0) || p.charAt(0) == '.'));
         
         if(p.length() >= 2 && p.charAt(1) == '*'){
-            return isMatch(s, p.substring(2)) || (firstMatch && isMatch(s.substring(1), p));
+        	return isMatch(s, p.substring(2)) || (firstMatch && isMatch(s.substring(1), p));
         } else {
             return firstMatch && isMatch(s.substring(1), p.substring(1));
         }

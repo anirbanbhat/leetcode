@@ -69,4 +69,23 @@ public class OddEvenLinkedList {
         }
         return head;
     }
+	
+	public static ListNode oddEvenList2(ListNode head) {
+		if(head == null || head.next == null || head.next.next == null){
+            return head;
+        }
+        ListNode odd = head;
+        ListNode even = head.next;
+        while(even != null && even.next != null){
+            ListNode temp1 = odd.next;
+            odd.next = even.next;
+            ListNode temp2 = even.next.next;
+            odd = odd.next;
+            odd.next = temp1;
+            even.next = temp2;
+            even = temp2;
+            
+        }
+        return head;
+    }
 }
